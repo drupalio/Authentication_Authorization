@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="col-4 offset-4 mt-5 mb-5">
+    <form [formGroup]="form" (submit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          name="firstName"
+          formControlName="firstName"
+          [class.is-invalid]="firstName.errors && firstName.touched"
+          placeholder="First name"
+        />
+        <div *ngIf="firstName.errors && firstName.touched">
+          <div class="text-danger" *ngIf="firstName.errors.required">
+            First name is required
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="firstName.errors.minlength || firstName.errors.maxlength"
+          >
+            First name must be between 3 and 20 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          name="lastName"
+          formControlName="lastName"
+          [class.is-invalid]="lastName.errors && lastName.touched"
+          placeholder="Last name"
+        />
+        <div *ngIf="lastName.errors && lastName.touched">
+          <div class="text-danger" *ngIf="lastName.errors.required">
+            Last name is required
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="lastName.errors.minlength || lastName.errors.maxlength"
+          >
+            Last name must be between 3 and 20 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          formControlName="email"
+          [class.is-invalid]="email.errors && email.touched"
+          placeholder="email"
+        />
+        <div *ngIf="email.errors && email.touched">
+          <div class="text-danger" *ngIf="email.errors.required">
+            Email is required
+          </div>
+          <div class="text-danger" *ngIf="email.errors.email">
+            Email format is incorrect
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          [class.is-invalid]="password.errors && password.touched"
+          placeholder="password"
+        />
+        <div *ngIf="password.errors && password.touched">
+          <div class="text-danger" *ngIf="password.errors.required">
+            Password is required
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="password.errors.minlength || password.errors.maxlength"
+          >
+            Password must be between 8 and 20 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Confirm password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+        />
+        <div class="text-danger" *ngIf="form.getError('misMatch')">
+          Password do not match
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select
+          class="custom-select"
+          name="role"
+          formControlName="role"
+          [class.is-invalid]="role.errors && role.touched"
+        >
+          <option selected value="">Choose a role</option>
+          <option *ngFor="let role of roles">{{ role.role }}</option>
+        </select>
+        <div *ngIf="role.errors && role.touched">
+          <div class="text-danger" *ngIf="role.errors.required">
+            Role is required
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary btn-block"
+        [disabled]="form.invalid"
+      >
+        Register
+      </button>
+    </form>
+  </div>
+</div>
